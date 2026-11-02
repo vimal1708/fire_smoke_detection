@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fire & Smoke Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="icon">🔥</div>
+
+        <h1>Fire & Smoke Detection</h1>
+
+        <p>
+            CNN-Based Image Classification System
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Upload an Image</h2>
+
+        <p class="subtitle">
+            Upload a fire, smoke or neutral image
+            for prediction.
+        </p>
+
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            <div class="upload-box">
+
+                <input
+                    type="file"
+                    name="image"
+                    accept=".jpg,.jpeg,.png"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+
+                🔍 Predict Image
+
+            </button>
+
+        </form>
+
+
+        {% if error %}
+
+            <div class="error">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        {% if image_path %}
+
+        <div class="result">
+
+            <h2>Prediction Result</h2>
+
+            <img
+                src="{{ image_path }}"
+                class="preview"
+            >
+
+
+            <div class="prediction">
+
+                <span>Prediction</span>
+
+                <strong>
+
+                    {% if prediction == "Fire" %}
+                        🔥 Fire
+                    {% elif prediction == "Smoke" %}
+                        💨 Smoke
+                    {% else %}
+                        🌿 Neutral
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="confidence">
+
+                <span>Model Confidence</span>
+
+                <strong>
+                    {{ "%.2f"|format(confidence) }}%
+                </strong>
+
+            </div>
+
+
+            <h3>Class Probabilities</h3>
+
+
+            {% for item in probabilities %}
+
+            <div class="probability">
+
+                <div class="prob-header">
+
+                    <span>{{ item.name }}</span>
+
+                    <span>
+                        {{ "%.2f"|format(item.value) }}%
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        style="width: {{ item.value }}%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="footer">
+
+        <p>
+            Built using Python, TensorFlow, CNN and Flask
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

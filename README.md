@@ -466,6 +466,56 @@ Possible improvements include:
 
 ---
 
+---
+
+## Real-Time Webcam Detection
+
+The project supports real-time Fire, Smoke, and Neutral classification using a laptop webcam.
+
+Run:
+
+```bash
+python realtime_detection.py
+```
+
+Features:
+- Live webcam classification.
+- Predicted class and confidence display.
+- CSV logging when predictions change.
+- Press `Q` to close the webcam window.
+
+## Desktop Detection Dashboard
+
+A graphical desktop dashboard was developed using Tkinter, OpenCV, TensorFlow, and Pillow.
+
+Run:
+
+```bash
+python fire_smoke_dashboard.py
+```
+
+Dashboard features:
+- Live webcam preview.
+- Start Camera and Stop Camera controls.
+- Fire, Smoke, and Neutral detection counters.
+- Current prediction and confidence.
+- Timestamped detection history.
+- Export detection history as CSV.
+- Clear History option.
+- Audible fire alarm when a stable Fire detection is recorded.
+
+The dashboard uses a confidence threshold and consecutive-frame checks to reduce unstable alerts.
+
+## Detection History
+
+Detection records are stored locally in `detection_history.csv`, containing timestamps, predicted classes, and confidence values. This generated file is excluded from GitHub.
+
+## Important Safety Disclaimer
+
+This is an experimental computer-vision demonstration, not a certified fire alarm or life-safety system. It may produce false positives or miss real fire and smoke events. Do not rely on it for actual fire protection.
+
+---
+
 ## 📌 Conclusion
 
 This project demonstrates an end-to-end deep learning workflow for Fire, Smoke, and Neutral image classification.
